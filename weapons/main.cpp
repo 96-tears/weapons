@@ -3,7 +3,8 @@
 //  weapons
 //
 //  Created by Евгений Тишкин on 01.12.2024.
-//
+//  Программа для демонстрации наследования и динамического полиморфизма
+//  на примере корабельного вооружения
 
 #include <iostream>
 #include "weapons.hpp"
@@ -13,17 +14,19 @@ int main() {
     
     //динамический полиморфизм
     shipWeapon* m2 = new mine;
-    m2->install();
-    //m2->defuse();
-    dynamic_cast<mine*>(m2)->defuse();
-    delete m2;
-    airDefence a2;
-    a2.install();
-    shipWeapon test = a2;
-    cout << "\nКол-во установок в тесте = " << test.quantity() << endl;
+    m2->install();          //вызов переопределенного метода
+    //m2->defuse();         //ошибка: вызова нет в базовом классе
+    dynamic_cast<mine*>(m2)->defuse();  //преобразование указателя на объект базового класса
+                                        //к указателю на объект производного класса и вызов метода
+    delete m2;              //очистка памяти
+    
+    airDefence a2;          //создание объекта класса ПВО
+    a2.install();           //вызов переопределенного метода (_quantity = 1)
+    shipWeapon test = a2;   //создание объекта базового класса (_quantity = 0) и приравнивание к a2 (_quantity = 1)
+    cout << "\nКол-во установок в тесте = " << test.quantity() << endl; //_quantity = 1 для объекта базового класса
     
     
-    airDefence a1;     //объявление объекта ПВО
+    airDefence a1;      //объявление объекта ПВО
     a1.install();       //установка ПВО
     a1.use();           //использование ПВО
     cout << "\nКол-во пво = " << a1.quantity() << endl;
