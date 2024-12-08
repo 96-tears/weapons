@@ -4,9 +4,27 @@
 //
 //  Created by Евгений Тишкин on 01.12.2024.
 //
+//  Данный модуль содержит базовый класс ShipWeapon с набором виртуальных функций и protected-полей
+//  Поля: double weight(вес), size_t _quantity(кол-во установок), double price (цена в $), string typeTarget (тип цели)
+//  Методы: void install(установка оружия), void use(применение оружия), void uninstall(снятие оружия),
+//  bool checked(проверка оружия), size_t quantity(возвращает кол-во установок) -- являются virtual и
+//  переопределены в производных классах
+//  Из данного базового класса следуют 2 производных: defensiveWeapon и attackWeapon
+//  Поля defensiveWeapon: double performance(быстродействие в часах), double chanceToRepel(шанс отражения атаки в %)
+//  Поля attackWeapon: double range(дистанция), double velocity(скорость полета снаряда в м/с), double accuracy(класс точности)
+//  Из класса defensiveWeapon следуют 2 производных: mine и airDefence
+//  У каждого из них есть 2 конструктора: пустой, который заполняет средние значения, и конструктор с аргументами
+//  В данных классах переопределены методы базового класса shipWeapon
+//  В классе mine есть собственный метод void defuse(обезвредить мину)
+//  Поля класса mine: double chargePower(мощность заряда в кг), string triggerType(тип взрывателя)
+//  Поля класса airDefence: double range(дальность)
+//  Из класса attackWeapon происходит класс torpedo
+//  Класс torpedo имеет 2 конструктора, как и предыдущие
+//  Поля класса torpedo: double power(мощность в кг), double lenght(длина в м)
 
 #include <iostream>
 using namespace std;
+
 ///базовый класс корабельного вооружения
 class shipWeapon
 {
